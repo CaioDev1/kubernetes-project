@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: PersistentVolumeClaim # Request a storage volume in the cluster
+metadata:
+  name: mysql-pv-claim # name of the volume
+  labels:
+    app: app # makes the volume open to be used by the main application pod
+spec:
+  accessModes:
+    - "ReadWriteOnce"
+  resources:
+    requests:
+      storage: 2Gi

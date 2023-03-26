@@ -1,0 +1,7 @@
+{
+    "yaml.schemas": {
+        "kubernetes://schema/v1@persistentvolumeclaim": [
+            "file:///Users/imcaio/caio-projects/kubernetes-project/k8s/mysql/mysql-persistent-volume-claim.yml"
+        ]
+    }
+}
