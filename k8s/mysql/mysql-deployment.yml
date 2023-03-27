@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql-app
+  labels:
+    app: mysql-app
+    tier: mysql
+spec:
+  replicas: 1 # Runs only one pod
+  selector:
+    matchLabels:
+      app: mysql-app
+      tier: mysql
+  strategy: # The deployment strategy to use to replace existing pods with new one
+    type: Recreate
+  template: # Deployment content specification
+    metadata:
+      labels:
+        app: mysql-app
+        tier: mysql
+    spec:
+      containers:
+      - name: kubernetes-mysql # Can be whatever name you want
+        image: mysql:latest # MySQL image from Docker Hub
+        env:
+          - name: MYSQL_ROOT_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: mysql-pass
+                key: password
+        ports:
+        - containerPort: 3306 # Port where MySQL runs by default
+          name: mysql-app
+        volumeMounts:
+          - name: mysql-persistent-storage
+            mountPath: /var/lib/mysql # Container folder where the MySQL data are placed and the VOLUME WILL BE LOCATED.
+      volumes:
+        - name: mysql-persistent-storage
+          persistentVolumeClaim:
+            claimName: mysql-pv-claim
