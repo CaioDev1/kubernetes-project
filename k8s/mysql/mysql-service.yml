@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql-service # In reason it does not have an IP, the MySQL service still has an network, in this case, "mysql-service" will be as an DNS point to the 3306 port 
+  labels:
+    app: mysql-service
+spec:
+  selector:
+    app: mysql-app
+    tier: mysql
+  ports:
+  - port: 3306
+  clusterIP: None # Not necessary an IP address for this project implementation

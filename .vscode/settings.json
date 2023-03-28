@@ -2,6 +2,8 @@
     "yaml.schemas": {
         "kubernetes://schema/v1@persistentvolumeclaim": [
             "file:///Users/imcaio/caio-projects/kubernetes-project/k8s/mysql/mysql-persistent-volume-claim.yml"
-        ]
+        ],
+        "kubernetes://schema/apps/v1@deployment": "file:///c%3A/Users/imcai/caio-projets/kubernetes-project/k8s/mysql/mysql-deployment.yml",
+        "kubernetes://schema/apps/v1@service": "file:///c%3A/Users/imcai/caio-projets/kubernetes-project/k8s/mysql/mysql-service.yml"
     }
 }
