@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app
+spec:
+  selector:
+    matchLabels:
+      app: app
+  template:
+    metadata:
+      labels:
+        app: app
+    spec:
+      containers:
+      - name: node-app
+        image: caiodev1/node-rest-api
+        resources:
+          limits:
+            memory: "350Mi"
+            cpu: "550m"
+        ports:
+        - containerPort: 3000
+        env:
+          - name: DB_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: mysql-pass # K8S MYSQL SECRET ENTITY
+                key: password
