@@ -5,6 +5,6 @@ const app = express()
 
 app.use(routes)
 
-const PORT = 3000
+const PORT = process.env.APP_PORT
 
 app.listen(PORT, () => console.log(`Server listening on port ${PORT}`))
