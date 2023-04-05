@@ -34,18 +34,18 @@ data:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx-loadbalancer
+  name: nginx-app
 spec:
   selector:
     matchLabels:
-      app: nginx-loadbalancer
+      app: nginx-app
   template:
     metadata:
       labels:
-        app: nginx-loadbalancer
+        app: nginx-app
     spec:
       containers:
-      - name: nginx-loadbalancer
+      - name: nginx-app
         image: nginx:latest
         ports:
         - containerPort: 80
@@ -72,7 +72,6 @@ metadata:
 spec:
   type: LoadBalancer # IT GENERATES AN EXTERNAL IP TO DISTRIBUTE THE BALANCE BETWEEN THE MAIN APP CONTAINERS
   selector:
-    app: nginx-loadbalancer
+    app: nginx-app
   ports:
   - port: 80
-

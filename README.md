@@ -36,3 +36,23 @@
 > ⚠️ Warning
 > In case of errors when applying the MySQL Deployment such as `Fatal error: Can't open and lock privilege tables: Table 'mysql.user' doesn't exist`
 > Recreate the Minikube container using the `minikube delete` and `minikube start` commands.
+
+
+k
+###### Steps to reflect the changes/modification made in the main application source doe to the K8S Pod container
+
+1. Save the modified files;
+2. Create an Docker tag (if not existent yet)
+    ```bash
+        `docker tag <image_name> <docker_hub_username>/<image_name>:latest
+    ```
+3. Build the image with the new modifications;
+    ```bash
+        `docker build -t <image_name>:latest <dockerfile_path>
+    ```
+4. Push the generated image to Docker Hub
+    ```bash
+        `docker push <docker_hub_username>/<image_name>:latest
+    ```
+
+By these steps, if the main application deployment yaml file keeps referencing this image with the same tag (latest), the changes should be applied to the Pod on Pod restart.
