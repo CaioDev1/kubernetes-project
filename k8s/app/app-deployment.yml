@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
       - name: node-app
-        image: docker.io/caiodev1/node-rest-api:latest
+        image: caiodev1/node-rest-api:v4
         imagePullPolicy: Always # BY DEFAULT, K8S WON'T FETCH IMAGES FROM DOCKER HUB IF THERE IS SOMEONE ALREADY INSTALLED (EVEN IF IT'S OLD BUT WITH THE SAME TAG)
         resources:
           limits:
@@ -21,9 +21,9 @@ spec:
             cpu: "550m"
         ports:
         - containerPort: 3000
-        envFrom:
-        - configMapRef: # REFERENCES THE APP-CONFIG-MAP ENTITY
-            name: app-config
+        # envFrom:
+        # - configMapRef: # REFERENCES THE APP-CONFIG-MAP ENTITY
+        #     name: app-config
         env:
           - name: DB_PASSWORD # DB PASSWORD NOT INCLUDED IN THE CONFIGMAP FOR BEING CONSIDERED AS SENSITIVE DATA 
             valueFrom:
@@ -32,13 +32,13 @@ spec:
                 key: password
         volumeMounts: # DECLARES HOW THE VOLUME "app-config-volume" IS APPLIED TO THE CONTAINER
           - name: app-config-volume
-            subPath: .env # PATH WITHIN THE VOLUME "app-config-volume" FROM WHICH THE CONTAINER VOLUME SHOULD BE MOUNTED
-            mountPath: var/www/.env # THE PATH WHICH WILL BE CREATED THE .ENV FILE IN THE CONTAINER WITH THE DATA FROM CONFIGMAP
+            subPath: .env # PATH WITHIN THE VOLUME "app-config-volume" WHICH THE CONTAINER VOLUME SHOULD BE MOUNTED
+            mountPath: /app/.env # THE PATH WHICH WILL BE CREATED THE .ENV FILE IN THE CONTAINER WITH THE DATA FROM CONFIGMAP
       volumes:
         - name: app-config-volume
           configMap:
             name: app-config
             items:
-              - key: env
-                path: .env
+              - key: env # CONFIGMAP KEY
+                path: .env # POD VOLUME PATH
             

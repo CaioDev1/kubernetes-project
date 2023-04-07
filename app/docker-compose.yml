@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  node-rest-api-dev:
+    image: node:latest
+    build:
+      dockerfile: DockerfileDev
+      context: .
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/app/
