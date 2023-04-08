@@ -30,6 +30,8 @@ spec:
               secretKeyRef:
                 name: mysql-pass # K8S MYSQL SECRET ENTITY
                 key: password
+          - name: DB_URL
+            value: mysql://${DB_USERNAME}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}
         volumeMounts: # DECLARES HOW THE VOLUME "app-config-volume" IS APPLIED TO THE CONTAINER
           - name: app-config-volume
             subPath: .env # PATH WITHIN THE VOLUME "app-config-volume" WHICH THE CONTAINER VOLUME SHOULD BE MOUNTED

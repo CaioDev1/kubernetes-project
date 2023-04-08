@@ -56,3 +56,17 @@ k
     ```
 
 By these steps, if the main application deployment yaml file keeps referencing this image with the same tag (latest), the changes should be applied to the Pod on Pod restart.
+
+
+###### Steps to access the MySQL CLI on its respective K8S Pod (If necessary)
+1. Access the MySQL Pod terminal
+    ```bash
+        kubectl exec -it <pod_name> /bin/bash 
+    ```
+2. Execute the MySQL CLI passing these respective params:
+    ```bash
+        mysql --host <mysql-service-name> -u<db_user> -p<db_password>
+        
+        #Example
+        mysql --host mysql-service -uroot -pdb123
+    ```
