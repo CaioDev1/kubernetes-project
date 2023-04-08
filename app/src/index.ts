@@ -1,8 +1,10 @@
 import dotenv from 'dotenv'
+import dotenvExpand from 'dotenv-expand'
 import express from 'express'
 import routes from './routes'
 
-dotenv.config()
+const env = dotenv.config()
+dotenvExpand.expand(env)
 
 const app = express()
 

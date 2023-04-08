@@ -9,3 +9,71 @@ datasource db {
   provider = "mysql"
   url      = env("DB_URL")
 }
+
+model Costumer {
+  id        Int       @id @default(autoincrement())
+  name      String    @db.VarChar(255)
+  address   String    @db.VarChar(255)
+  email     String    @db.VarChar(255)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  orders    Order[]
+}
+
+model Product {
+  id            Int         @id @default(autoincrement())
+  name          String      @db.VarChar(255)
+  description   String?
+  price         Decimal     @db.Decimal(10, 2)
+  stock         Int         @default(0)
+  orderItems    OrderItem[]
+  category      String      @db.VarChar(255)
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+}
+
+model Order {
+  id          Int         @id @default(autoincrement())
+  status      String      @db.VarChar(255)
+  costumerId  Int
+  costumer    Costumer    @relation(fields: [costumerId], references: [id])
+  total       Decimal     @db.Decimal(10, 2)
+  items       OrderItem[]
+  shippings   Shipping[]
+  payments    Payment[]
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt  
+}
+
+model OrderItem {
+  id          Int       @id @default(autoincrement())
+  orderId     Int
+  order       Order     @relation(fields: [orderId], references: [id])
+  productId   Int
+  product     Product   @relation(fields: [productId], references: [id])
+  quantity    Int
+  price       Decimal   @db.Decimal(10, 2)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt  
+}
+
+model Shipping {
+  id              Int       @id @default(autoincrement())
+  orderId         Int
+  order           Order     @relation(fields: [orderId], references: [id])
+  transmitter     String    @db.VarChar(255)
+  trackingNumber  String    @db.VarChar(255)
+  shippedAt       DateTime  @default(now())
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+}
+
+model Payment {
+  id         Int        @id @default(autoincrement())
+  orderId    Int
+  order      Order      @relation(fields: [orderId], references: [id])
+  type       String     @db.VarChar(255)
+  paidAt     DateTime   @default(now())
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime   @updatedAt
+}

@@ -38,8 +38,7 @@
 > Recreate the Minikube container using the `minikube delete` and `minikube start` commands.
 
 
-k
-###### Steps to reflect the changes/modification made in the main application source doe to the K8S Pod container
+#### Steps to reflect the changes/modification made in the main application source doe to the K8S Pod container
 
 1. Save the modified files;
 2. Create an Docker tag (if not existent yet)
@@ -58,14 +57,14 @@ k
 By these steps, if the main application deployment yaml file keeps referencing this image with the same tag (latest), the changes should be applied to the Pod on Pod restart.
 
 
-###### Steps to access the MySQL CLI on its respective K8S Pod (If necessary)
+#### Steps to access the MySQL CLI on its respective K8S Pod (If necessary)
 1. Access the MySQL Pod terminal
     ```bash
         kubectl exec -it <pod_name> /bin/bash 
     ```
 2. Execute the MySQL CLI passing these respective params:
     ```bash
-        mysql --host <mysql-service-name> -u<db_user> -p<db_password>
+        mysql --host <mysql_service_name> -u<db_user> -p<db_password>
         
         #Example
         mysql --host mysql-service -uroot -pdb123
