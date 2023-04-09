@@ -71,7 +71,7 @@ By these steps, if the main application deployment yaml file keeps referencing t
 >    ```
 
 > 🗣️ Tip
-> In case you want to develop the main NodeJS application with Prisma and need to apply the Types for its respective entities use: <br>
+> In case of Prisma binaries not implemented yet, run: <br>
 > ```bash
 >    npx prisma generate
 > ```
