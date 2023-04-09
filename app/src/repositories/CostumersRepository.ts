@@ -11,4 +11,5 @@ export interface CostumerCreationData {
 
 export interface CostumersRepository {
     create(costumer: CostumerCreationData): Promise<Costumer>
+    getAll(): Promise<Costumer[]>
 }

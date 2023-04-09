@@ -10,7 +10,11 @@ export class CostumersController {
 
     create(costumer: CostumerCreationData): Promise<Costumer> {
         if(!costumer) throw new Error('Creation data payload must be included')
-        
+
         return this.costumersRepository.create(costumer)
+    }
+
+    getAll(): Promise<Costumer[]> {
+        return this.costumersRepository.getAll()
     }
 }

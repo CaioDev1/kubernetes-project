@@ -12,7 +12,7 @@ data:
 
     http {
         upstream mainAppServer {
-            server app-service:3000; #K8S main app service
+            server app-service:3000; #K8S main app service DNS
         }
 
         server {

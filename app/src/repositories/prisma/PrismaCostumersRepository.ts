@@ -7,4 +7,8 @@ export class PrismaCostumersRepository implements CostumersRepository {
             data
         })
     }
+
+    async getAll() {
+        return prisma.costumer.findMany()
+    }
 }
