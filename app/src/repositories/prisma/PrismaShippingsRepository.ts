@@ -1,9 +1,9 @@
 import {prisma} from '../../prisma'
-import { Shipping, ShippingsRepository } from '../ShippingsRepository'
+import { ShippingCreationData, ShippingsRepository } from '../ShippingsRepository'
 
 export class PrismaShippingsRepository implements ShippingsRepository {
-    async create(data: Shipping) {
-        await prisma.shipping.create({
+    async create(data: ShippingCreationData) {
+        return prisma.shipping.create({
             data
         })
     }

@@ -1,5 +1,5 @@
-import { Product, ProductsRepository } from "../repositories/ProductsRepository";
-
+import { Product } from "@prisma/client";
+import { ProductCreationData, ProductsRepository } from "../repositories/ProductsRepository";
 
 export class ProductsController {
     constructor(
@@ -8,7 +8,9 @@ export class ProductsController {
 
     }
 
-    create(product: Product): Promise<void> {
+    create(product: ProductCreationData): Promise<Product> {
+        if(!product) throw new Error('Creation data payload must be included')
+
         return this.productsRepository.create(product)
     }
 }

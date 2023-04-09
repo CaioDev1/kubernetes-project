@@ -1,13 +1,13 @@
-export interface Shipping {
-    id: number
+import { Shipping } from "@prisma/client"
+
+export interface ShippingCreationData {
+    id?: number
     orderId: number
     transmitter: string
     trackingNumber: string
-    shippedAt: string
-    createdAt: string
-    updatedAt: string
+    shippedAt: Date
 }
 
 export interface ShippingsRepository {
-    create(costumer: Shipping): Promise<void>
+    create(costumer: ShippingCreationData): Promise<Shipping>
 }

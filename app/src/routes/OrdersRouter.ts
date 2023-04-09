@@ -1,19 +1,20 @@
 import { Router } from 'express'
 import { PrismaOrdersRepository } from '../repositories/prisma/PrismaOrdersRepository'
 import { OrdersController } from '../controllers/OrdersController'
+import { OrderCreationData } from '../repositories/OrdersRepository'
 
 const route = Router()
 
 route.post('/orders', async (req, res) => {
-    const order = req.body
+    const order: OrderCreationData = req.body
 
     const prismaOrdersRepository = new PrismaOrdersRepository()
-    const ordersRepository = new OrdersController(prismaOrdersRepository)
+    const ordersController = new OrdersController(prismaOrdersRepository)
 
     try {
-        await ordersRepository.create(order)
+        const data = await ordersController.create(order)
 
-        res.status(201).send()
+        res.status(201).send(data)
     } catch (error: any) {
         res.status(400).json({
             error: error.message

@@ -1,9 +1,9 @@
 import {prisma} from '../../prisma'
-import { Order, OrdersRepository } from '../OrdersRepository'
+import { OrderCreationData, OrdersRepository } from '../OrdersRepository'
 
 export class PrismaOrdersRepository implements OrdersRepository {
-    async create(data: Order) {
-        await prisma.order.create({
+    async create(data: OrderCreationData) {
+        return prisma.order.create({
             data
         })
     }

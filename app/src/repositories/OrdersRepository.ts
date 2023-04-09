@@ -1,12 +1,12 @@
-export interface Order {
-    id: number
+import { Order } from "@prisma/client"
+
+export interface OrderCreationData {
+    id?: number
     status: string
     costumerId: number
     total: number
-    createdAt: string
-    updatedAt: string
 }
 
 export interface OrdersRepository {
-    create(costumer: Order): Promise<void>
+    create(costumer: OrderCreationData): Promise<Order>
 }

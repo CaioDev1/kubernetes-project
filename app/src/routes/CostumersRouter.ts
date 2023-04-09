@@ -1,22 +1,25 @@
 import { Router } from 'express'
 import { PrismaCostumersRepository } from '../repositories/prisma/PrismaCostumersRepository'
 import { CostumersController } from '../controllers/CostumersController'
+import { CostumerCreationData } from '../repositories/CostumersRepository'
 
 const route = Router()
 
 route.post('/costumers', async (req, res) => {
-    const costumer = req.body
-
+    const costumer: CostumerCreationData = req.body
+    
     const prismaCostumersRepository = new PrismaCostumersRepository()
-    const costumersRepository = new CostumersController(prismaCostumersRepository)
+    const costumersController = new CostumersController(prismaCostumersRepository)
 
     try {
-        await costumersRepository.create(costumer)
+        const data = await costumersController.create(costumer)
 
-        res.status(201).send()
+        res.status(201).send(data)
     } catch (error: any) {
+        console.log(error)
         res.status(400).json({
-            error: error.message
+            error: error.message,
+            stack: error.stack
         })
     }
 })

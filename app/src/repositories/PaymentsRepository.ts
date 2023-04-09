@@ -1,12 +1,12 @@
-export interface Payment {
-    id: number
+import { Payment } from "@prisma/client"
+
+export interface PaymentCreationData {
+    id?: number
     orderId: number
     type: string
     paidAt: string
-    createdAt: string
-    updatedAt: string
 }
 
 export interface PaymentsRepository {
-    create(costumer: Payment): Promise<void>
+    create(costumer: PaymentCreationData): Promise<Payment>
 }

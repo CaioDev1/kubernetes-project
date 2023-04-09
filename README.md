@@ -33,9 +33,9 @@
         `kubectl apply -f nginx-deployment.yml
     ``` 
 
-> ⚠️ Warning
-> In case of errors when applying the MySQL Deployment such as `Fatal error: Can't open and lock privilege tables: Table 'mysql.user' doesn't exist`
-> Recreate the Minikube container using the `minikube delete` and `minikube start` commands.
+> ⚠️ Warning <br>
+> In case of errors when applying the MySQL Deployment such as `Fatal error: Can't open and lock privilege tables: Table 'mysql.user' doesn't exist` <br>
+> Recreate the Minikube container using the ```minikube delete``` and ```minikube start``` commands.
 
 
 #### Steps to reflect the changes/modification made in the main application source doe to the K8S Pod container
@@ -43,29 +43,35 @@
 1. Save the modified files;
 2. Create an Docker tag (if not existent yet)
     ```bash
-        `docker tag <image_name> <docker_hub_username>/<image_name>:latest
+        `docker tag <image_name> <docker_hub_username>/<image_name>:<new_tag>
     ```
 3. Build the image with the new modifications;
     ```bash
-        `docker build -t <image_name>:latest <dockerfile_path>
+        `docker build -t <image_name>:<new_tag> <dockerfile_path>
     ```
 4. Push the generated image to Docker Hub
     ```bash
-        `docker push <docker_hub_username>/<image_name>:latest
+        `docker push <docker_hub_username>/<image_name>:<new_tag>
     ```
 
 By these steps, if the main application deployment yaml file keeps referencing this image with the same tag (latest), the changes should be applied to the Pod on Pod restart.
 
 
-#### Steps to access the MySQL CLI on its respective K8S Pod (If necessary)
-1. Access the MySQL Pod terminal
-    ```bash
-        kubectl exec -it <pod_name> /bin/bash 
-    ```
-2. Execute the MySQL CLI passing these respective params:
-    ```bash
-        mysql --host <mysql_service_name> -u<db_user> -p<db_password>
-        
-        #Example
-        mysql --host mysql-service -uroot -pdb123
-    ```
+> Steps to access the application database in the MySQL CLI on its respective K8S Pod (If necessary) <br>
+> 1. Access the MySQL Pod terminal <br>
+>    ```bash
+>        kubectl exec -it <pod_name> /bin/bash 
+>    ```
+> 2. Execute the MySQL CLI passing these respective params: <br>
+>    ```bash
+>        mysql --host <mysql_service_name> -u<db_user> -p<db_password>
+>        
+>        #Example
+>        mysql --host mysql-service -uroot -pdb123 # Docker treats the host name as an DNS address pointing to an IP
+>    ```
+
+> 🗣️ Tip
+> In case you want to develop the main NodeJS application with Prisma and need to apply the Types for its respective entities use: <br>
+> ```bash
+>    npx prisma generate
+> ```

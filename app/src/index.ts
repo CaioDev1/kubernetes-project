@@ -8,6 +8,7 @@ dotenvExpand.expand(env)
 
 const app = express()
 
+app.use(express.json())
 app.use(routes)
 
 const PORT = process.env.APP_PORT

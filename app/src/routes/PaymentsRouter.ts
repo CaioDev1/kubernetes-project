@@ -1,19 +1,20 @@
 import { Router } from 'express'
 import { PaymentsController } from '../controllers/PaymentsController'
 import { PrismaPaymentsRepository } from '../repositories/prisma/PrismaPaymentsRepository'
+import { PaymentCreationData } from '../repositories/PaymentsRepository'
 
 const route = Router()
 
 route.post('/payments', async (req, res) => {
-    const payment = req.body
+    const payment: PaymentCreationData = req.body
 
     const prismaPaymentsRepository = new PrismaPaymentsRepository()
-    const paymentsRepository = new PaymentsController(prismaPaymentsRepository)
+    const paymentsController = new PaymentsController(prismaPaymentsRepository)
 
     try {
-        await paymentsRepository.create(payment)
+        const data = await paymentsController.create(payment)
 
-        res.status(201).send()
+        res.status(201).send(data)
     } catch (error: any) {
         res.status(400).json({
             error: error.message

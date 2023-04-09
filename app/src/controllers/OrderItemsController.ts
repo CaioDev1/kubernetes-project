@@ -1,5 +1,5 @@
-import { OrderItem, OrderItemsRepository } from "../repositories/OrderItemsRepository";
-
+import { OrderItem } from "@prisma/client";
+import { OrderItemCreationData, OrderItemsRepository } from "../repositories/OrderItemsRepository";
 
 export class OrderItemsController {
     constructor(
@@ -8,7 +8,9 @@ export class OrderItemsController {
 
     }
 
-    create(orderItem: OrderItem): Promise<void> {
+    create(orderItem: OrderItemCreationData): Promise<OrderItem> {
+        if(!orderItem) throw new Error('Creation data payload must be included')
+
         return this.orderItemsRepository.create(orderItem)
     }
 }

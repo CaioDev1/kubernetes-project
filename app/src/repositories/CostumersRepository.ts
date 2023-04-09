@@ -1,13 +1,14 @@
-export interface Costumer {
-    id: number
+import { Costumer } from "@prisma/client"
+
+export interface CostumerCreationData {
+    id?: number
     name: string
     address: string
     email: string
-    createdAt: string
-    updatedAt: string
+    password: string
 }
 
 
 export interface CostumersRepository {
-    create(costumer: Costumer): Promise<void>
+    create(costumer: CostumerCreationData): Promise<Costumer>
 }
