@@ -6,11 +6,14 @@ import ProductsRoutes from './ProductsRouter'
 import ShippingsRoutes from './ShippingsRouter'
 import PaymentsRoutes from './PaymentsRouter'
 
+import { version } from '../../package.json';
+
 const route = Router()
 
 route.get('/', (req, res) => {
     res.status(200).json({
-        message: 'Response example'
+        name: 'E-commerce API',
+        version
     })
 })
 

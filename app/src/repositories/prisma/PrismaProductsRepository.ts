@@ -7,4 +7,8 @@ export class PrismaProductsRepository implements ProductsRepository {
             data
         })
     }
+
+    async getAll() {
+        return prisma.product.findMany()
+    }
 }

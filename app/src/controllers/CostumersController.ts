@@ -1,5 +1,7 @@
 import { Costumer } from "@prisma/client";
 import { CostumerCreationData, CostumersRepository } from "../repositories/CostumersRepository";
+import exclude from '../utils/prisma/excludeAttribute'
+import bcrypt from 'bcryptjs'
 
 export class CostumersController {
     constructor(
@@ -8,13 +10,31 @@ export class CostumersController {
 
     }
 
-    create(costumer: CostumerCreationData): Promise<Costumer> {
-        if(!costumer) throw new Error('Creation data payload must be included')
+    async create(costumerCreationData: CostumerCreationData) {
+        const costumer = await this.costumersRepository.create(costumerCreationData)
 
-        return this.costumersRepository.create(costumer)
+        return exclude<Costumer, 'password'>(costumer, ['password'])
     }
 
-    getAll(): Promise<Costumer[]> {
-        return this.costumersRepository.getAll()
+    async getAll() {
+        const costumers = await this.costumersRepository.getAll()
+
+        return costumers.map(costumer => {
+            const costumerWithoutPassword = exclude<Costumer, 'password'>(costumer, ['password', ])
+            
+            return costumerWithoutPassword
+        })
+    }
+
+    async login(loginParams: Pick<Costumer, 'email' | 'password'>) {
+        const costumer = await this.costumersRepository.findByEmail(loginParams.email)
+
+        if(!costumer) throw new Error('Costumer not found')
+
+        const passwordVerify = await bcrypt.compare(loginParams.password, costumer.password)
+
+        if(!passwordVerify) throw new Error('Wrong password')
+
+        return exclude<Costumer, 'password'>(costumer, ['password'])
     }
 }

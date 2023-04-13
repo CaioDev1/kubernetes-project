@@ -13,4 +13,8 @@ export class ProductsController {
 
         return this.productsRepository.create(product)
     }
+
+    getAll(): Promise<Product[]> {
+        return this.productsRepository.getAll()
+    }
 }

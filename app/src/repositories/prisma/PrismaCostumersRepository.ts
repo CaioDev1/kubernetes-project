@@ -9,6 +9,14 @@ export class PrismaCostumersRepository implements CostumersRepository {
     }
 
     async getAll() {
-        return prisma.costumer.findMany()
+        return prisma.costumer.findMany({
+            
+        })
+    }
+
+    async findByEmail(email: string) {
+        return prisma.costumer.findUnique({
+            where: {email}
+        })
     }
 }

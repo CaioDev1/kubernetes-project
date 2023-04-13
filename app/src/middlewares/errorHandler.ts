@@ -5,8 +5,9 @@ export const handler: ErrorRequestHandler = async (err, req, res, next) => {
         return next(err)
     }
 
+    console.error(err.stack)
+
     res.status(400).json({
-        error: err.message,
-        stack: err.stack
+        error: err.message
     })
 }

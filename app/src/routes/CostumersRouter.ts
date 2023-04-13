@@ -4,6 +4,7 @@ import { CostumersController } from '../controllers/CostumersController'
 import { CostumerCreationData } from '../repositories/CostumersRepository'
 import { routeSchemaValidator } from '../middlewares/routeSchemaValidator'
 import Joi from 'joi'
+import { Costumer } from '@prisma/client'
 
 const route = Router()
 
@@ -19,7 +20,7 @@ route.post('/costumers', [
             password: Joi.string().required()
         }),
     )
-],async (req: Request, res: Response, next: NextFunction) => {
+], async (req: Request, res: Response, next: NextFunction) => {
     const costumer: CostumerCreationData = req.body
     
     try {
@@ -31,11 +32,30 @@ route.post('/costumers', [
     }
 })
 
+route.post('/login', [
+    routeSchemaValidator(
+        Joi.object({
+            email: Joi.string().required().email(),
+            password: Joi.string().required()
+        }),
+    )
+], async (req: Request, res: Response, next: NextFunction) => {
+    const loginParams: Pick<Costumer, 'email' | 'password'> = req.body
+    
+    try {
+        const data = await costumersController.login(loginParams)
+
+        res.status(201).send(data)
+    } catch (error: any) {
+        next(error)
+    }
+})
+
 route.get('/costumers', async (req, res, next) => {
     try {
         const data = await costumersController.getAll()
 
-        res.status(201).send(data)
+        res.status(200).send(data)
     } catch (error: any) {
         next(error)
     }

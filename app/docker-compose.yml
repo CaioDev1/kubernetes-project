@@ -15,7 +15,7 @@ services:
   mysql-app:
     image: mysql:latest
     ports:
-      - 3306
+      - 3310:3306
     volumes:
       - .docker/mysql/:/var/lib/mysql
     environment:

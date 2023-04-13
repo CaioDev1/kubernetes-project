@@ -12,4 +12,5 @@ export interface CostumerCreationData {
 export interface CostumersRepository {
     create(costumer: CostumerCreationData): Promise<Costumer>
     getAll(): Promise<Costumer[]>
+    findByEmail(email: string): Promise<Costumer | null>
 }

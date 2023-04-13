@@ -11,4 +11,5 @@ export interface ProductCreationData {
 
 export interface ProductsRepository {
     create(costumer: ProductCreationData): Promise<Product>
+    getAll(): Promise<Product[]>
 }
