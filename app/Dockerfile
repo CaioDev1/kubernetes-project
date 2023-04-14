@@ -10,8 +10,10 @@ COPY src/ /app/src
 COPY prisma/ /app/prisma
 COPY tsconfig.json /app/
 
+RUN npx prisma generate
+
 RUN npm run build
 
 EXPOSE 3000
 
-CMD [ "npm", "start:prod" ]
+CMD [ "npm", "run", "start:prod" ]

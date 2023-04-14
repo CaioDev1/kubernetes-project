@@ -41,14 +41,15 @@
 #### Steps to reflect the changes/modification made in the main application source doe to the K8S Pod container
 
 1. Save the modified files;
-2. Create an Docker tag (if not existent yet)
-    ```bash
-        `docker tag <image_name> <docker_hub_username>/<image_name>:<new_tag>
-    ```
-3. Build the image with the new modifications;
+2. Build the image with the new modifications;
     ```bash
         `docker build -t <image_name>:<new_tag> <dockerfile_path>
     ```
+3. Create an Docker tag (if not existent yet)
+    ```bash
+        `docker tag <image_name>:<new_tag> <docker_hub_username>/<image_name>:<new_tag>
+    ```
+
 4. Push the generated image to Docker Hub
     ```bash
         `docker push <docker_hub_username>/<image_name>:<new_tag>
@@ -71,7 +72,11 @@ By these steps, if the main application deployment yaml file keeps referencing t
 >    ```
 
 > 🗣️ Tip
-> In case of Prisma binaries not implemented yet, run: <br>
+> 1. In case of Prisma binaries not implemented yet, run: <br>
 > ```bash
 >    npx prisma generate
+> ```
+> 2. To apply the declared seeds to the database, run: <br>
+> ```bash
+>    npx prisma db seed
 > ```

@@ -7,6 +7,7 @@
             "file:///c%3A/Users/imcai/caio-projets/kubernetes-project/k8s/mysql/mysql-deployment.yml",
             "file:///home/caiodev1/caio-projects/kubernetes-project/k8s/app/app-deployment.yml"
         ],
-        "kubernetes://schema/apps/v1@service": "file:///c%3A/Users/imcai/caio-projets/kubernetes-project/k8s/mysql/mysql-service.yml"
+        "kubernetes://schema/apps/v1@service": "file:///c%3A/Users/imcai/caio-projets/kubernetes-project/k8s/mysql/mysql-service.yml",
+        "kubernetes://schema/autoscaling/v2@horizontalpodautoscaler": "file:///Users/imcaio/caio-projects/kubernetes-project/k8s/app/app-hpa.yml"
     }
 }
