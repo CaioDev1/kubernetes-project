@@ -83,3 +83,8 @@ By these steps, if the main application deployment yaml file keeps referencing t
 > ```bash
 >    npx prisma db seed
 > ```
+
+> Command to make an stress test on the API endpoint:
+    ```bash
+        while true; do wget -q -O- <api_url>;done;
+    ```
