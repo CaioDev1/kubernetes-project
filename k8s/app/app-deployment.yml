@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
       - name: node-app
-        image: caiodev1/node-rest-api:v7
+        image: caiodev1/node-rest-api:v8
         imagePullPolicy: Always # BY DEFAULT, K8S WON'T FETCH IMAGES FROM DOCKER HUB IF THERE IS SOMEONE ALREADY INSTALLED (EVEN IF IT'S OLD BUT WITH THE SAME TAG)
         resources:
           limits:
