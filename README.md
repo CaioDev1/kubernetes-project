@@ -88,3 +88,5 @@ By these steps, if the main application deployment yaml file keeps referencing t
     ```bash
         while true; do wget -q -O- <api_url>;done;
     ```
+
+### 📜 [API routes documentation](https://documenter.getpostman.com/view/23113709/2s93Xwz4QD)
