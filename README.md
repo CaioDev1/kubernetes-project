@@ -1,3 +1,5 @@
+<img src="./public/k8s-ecommerce-diagram.png" /> <br> <br>
+
 1. Using `kubectl`, execute the mysql database pod secret creation configuration on "mysql-secret.yml" file;
     ```bash
         kubectl apply -f mysql-secret.yml
@@ -88,5 +90,6 @@ By these steps, if the main application deployment yaml file keeps referencing t
     ```bash
         while true; do wget -q -O- <api_url>;done;
     ```
+<br>
 
-### 📜 [API routes documentation](https://documenter.getpostman.com/view/23113709/2s93Xwz4QD)
+## 📜 [API routes documentation](https://documenter.getpostman.com/view/23113709/2s93Xwz4QD)
