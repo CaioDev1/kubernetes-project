@@ -42,6 +42,8 @@
 > In case of errors when applying the MySQL Deployment such as `Fatal error: Can't open and lock privilege tables: Table 'mysql.user' doesn't exist` <br>
 > Recreate the Minikube container using the ```minikube delete``` and ```minikube start``` commands.
 
+> Make sure to have minikube metrics-service addon enabled, if it's not, use the command: ```minikube addons enable metrics-server```
+
 
 #### Steps to reflect the changes/modification made in the main application source doe to the K8S Pod container
 
